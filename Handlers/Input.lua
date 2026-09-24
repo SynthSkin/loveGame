@@ -1,6 +1,5 @@
 local Signal = require("Libraries.Signal")
-local OldTable = table
-local table = require("Libraries.Table")
+local betterTable = require("Libraries.Table")
 
 local Listener = {}
 Listener.__index = Listener
@@ -33,7 +32,7 @@ function Handler:CreateListener(Key, PressType, Contexts) --Key:String, PressTyp
 end
 
 function Handler:RemoveListener(listener)
-    local Index = table.find(self._Listeners, listener)
+    local Index = betterTable.find(self._Listeners, listener)
     if Index then
         table.remove(self._Listeners, Index)
     end
@@ -47,7 +46,7 @@ end
 
 function Handler:DisableContexts(Contexts)
     for i, Context in ipairs(Contexts) do
-        local foundIndex = table.find(self._ActiveContexts, Context)
+        local foundIndex = betterTable.find(self._ActiveContexts, Context)
         if foundIndex then
             table.remove(self._ActiveContexts, foundIndex)
         end
@@ -56,8 +55,8 @@ end
 
 function Handler:TriggerInput(k, pressType)
     for i, listener in pairs(self._Listeners) do
-        if k == listener._K then
-            if listener._Contexts and table.doContentsExistIn(listener._Contexts, self._ActiveContexts) then
+        if k == listener._K and pressType == listener._PressType then
+            if listener._Contexts and betterTable.doContentsExistIn(listener._Contexts, self._ActiveContexts) then
                 Listener.Signal:Fire()
             elseif not listener._Contexts then
                 listener.Signal:Fire()

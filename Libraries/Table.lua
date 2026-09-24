@@ -1,33 +1,5 @@
 local TableFunctions = {}
 
-function TableFunctions.concat(tableData, separator, start, stop)
-    return table.concat(tableData, separator, start, stop)
-end
-
-function TableFunctions.insert(tableData, position, value)
-	return table.insert(tableData, position, value)
-end
-
-function TableFunctions.move(source, sourcePos, targetEnd, targetPos, target)
-    return table.move(source, sourcePos, targetEnd, targetPos, target)
-end
-
-function TableFunctions.pack(...)
-    return table.pack(...)
-end
-
-function TableFunctions.remove(tableData, position)
-    return table.remove(tableData, position)
-end
-
-function TableFunctions.sort(tableData, comp)
-    return table.sort(tableData, comp)
-end
-
-function TableFunctions.unpack(tableData, start, stop)
-    return table.unpack(tableData, start, stop)
-end
-
 function TableFunctions.find(SearchTable, Value) --Returns the index of a value within a table or false
     for i, iValue in ipairs(SearchTable) do
         if iValue == Value then
